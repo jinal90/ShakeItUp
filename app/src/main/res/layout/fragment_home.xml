@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.HomeFragment"
+    android:padding="8dp">
+
+    <androidx.cardview.widget.CardView
+
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_cocktail"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="200dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:layout_constraintTop_toTopOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_cocktails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Cocktails"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_mocktail"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="200dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:layout_constraintTop_toBottomOf="@id/card_view_cocktail"
+        card_view:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvMocktails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Mocktails"/>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
