@@ -26,10 +26,18 @@
         <action
             android:id="@+id/action_cocktailsListFragment_to_cocktailDetailFragment"
             app:destination="@id/cocktailDetailFragment" />
+        <argument
+            android:name="isAlcoholic"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/cocktailDetailFragment"
         android:name="com.capestone.shakeitup.view.CocktailDetailFragment"
         android:label="fragment_cocktail_detail"
-        tools:layout="@layout/fragment_cocktail_detail" />
+        tools:layout="@layout/fragment_cocktail_detail" >
+        <argument
+            android:name="cocktailId"
+            app:argType="string" />
+    </fragment>
 </navigation>

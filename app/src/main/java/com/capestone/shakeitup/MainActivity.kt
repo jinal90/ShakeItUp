@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         viewModel.getAlcoholicCocktails().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {

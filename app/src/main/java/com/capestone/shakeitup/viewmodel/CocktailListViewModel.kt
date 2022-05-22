@@ -47,4 +47,8 @@ class CocktailListViewModel @Inject constructor(private val repository: Cocktail
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }

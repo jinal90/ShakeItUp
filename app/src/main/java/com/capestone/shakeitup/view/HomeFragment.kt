@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.capestone.shakeitup.R
-import com.capestone.shakeitup.databinding.FragmentHomeBackupBinding
 import com.capestone.shakeitup.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -22,10 +20,10 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.cardViewCocktail.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(true))
         }
         binding.cardViewMocktail.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(false))
         }
         val view = binding.root
         return view
