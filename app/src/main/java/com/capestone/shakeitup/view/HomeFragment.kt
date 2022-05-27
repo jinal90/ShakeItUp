@@ -20,10 +20,10 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.cardViewCocktail.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(true))
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(isAlcoholic = true, title = "Alcoholic Cocktails"))
         }
         binding.cardViewMocktail.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(false))
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(isAlcoholic = false, title = "Non-Alcoholic Mocktails"))
         }
         val view = binding.root
         return view

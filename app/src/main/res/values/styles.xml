@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="nameText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:textSize">@dimen/cocktail_name_text_size</item>
+        <item name="fontFamily">@font/aclonica</item>
+    </style>
+
+    <style name="detailText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/cocktail_detail_text_size</item>
+        <item name="fontFamily">@font/baloo_bhaina_2</item>
+    </style>
+</resources>

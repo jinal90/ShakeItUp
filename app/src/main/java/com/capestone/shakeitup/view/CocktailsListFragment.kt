@@ -85,7 +85,8 @@ class CocktailsListFragment : Fragment() {
     }
 
     private fun navigateToDetailScreen(cocktail: Cocktail) {
-        findNavController().navigate(CocktailsListFragmentDirections.actionCocktailsListFragmentToCocktailDetailFragment(cocktail.idDrink))
+        findNavController().navigate(CocktailsListFragmentDirections
+            .actionCocktailsListFragmentToCocktailDetailFragment(cocktailId = cocktail.idDrink, cocktailName = cocktail.strDrink))
     }
 
     override fun onDestroyView() {

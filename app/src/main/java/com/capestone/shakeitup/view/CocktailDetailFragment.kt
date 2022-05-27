@@ -53,7 +53,7 @@ class CocktailDetailFragment : Fragment() {
                                 .with(view)
                                 .load(cocktail.cocktailDetailsList[0].strDrinkThumb)
                                 .placeholder(R.drawable.ic_baseline_wine_bar_24)
-                                .into(binding.ivCocktailThumbnail)
+                                .into(binding.ivCocktail)
 
                             Log.d(
                                 "Test list", "Test 1234 -> first alcoholic drink id:" +

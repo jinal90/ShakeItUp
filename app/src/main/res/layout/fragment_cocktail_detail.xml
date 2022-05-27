@@ -4,51 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/standard_margin"
     tools:context=".view.HomeFragment">
 
     <ImageView
-        android:id="@+id/iv_cocktail_thumbnail"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_margin="12dp"
+        android:id="@+id/iv_cocktail"
+        android:layout_width="@dimen/size_full_image"
+        android:layout_height="@dimen/size_full_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_cocktailName"
+        style="@style/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        app:layout_constraintStart_toEndOf="@id/iv_cocktail_thumbnail"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_cocktail"
         tools:text="Cocktail name" />
 
     <TextView
         android:id="@+id/tv_cocktailType"
+        style="@style/detailText"
+        android:textColor="@color/teal_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        app:layout_constraintStart_toEndOf="@id/iv_cocktail_thumbnail"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_cocktailName"
         tools:text="This drink is Alcoholic" />
 
     <TextView
         android:id="@+id/tv_ingredients"
+        style="@style/detailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iv_cocktail_thumbnail"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="12dp"
-        tools:text="Ingredients: fkfj,sdfj, sdfjd, sdhfs"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_cocktailType"
+        tools:text="Ingredients: fkfj,sdfj, sdfjd, sdhfs" />
 
     <TextView
         android:id="@+id/tv_instruction"
+        style="@style/detailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_ingredients"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="12dp"
-        tools:text="Instruction: mix blah blah."/>
+        app:layout_constraintTop_toBottomOf="@id/tv_ingredients"
+        tools:text="Instruction: mix blah blah." />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

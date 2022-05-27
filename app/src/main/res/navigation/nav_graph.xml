@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.capestone.shakeitup.view.HomeFragment"
-        android:label="fragment_home"
+        android:label="Shake It Up"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_cocktailsListFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/cocktailsListFragment"
         android:name="com.capestone.shakeitup.view.CocktailsListFragment"
-        android:label="fragment_cocktails_list"
+        android:label="{title}"
         tools:layout="@layout/fragment_cocktails_list" >
         <action
             android:id="@+id/action_cocktailsListFragment_to_cocktailDetailFragment"
@@ -30,14 +30,20 @@
             android:name="isAlcoholic"
             app:argType="boolean"
             android:defaultValue="false" />
+        <argument
+            android:name="title"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/cocktailDetailFragment"
         android:name="com.capestone.shakeitup.view.CocktailDetailFragment"
-        android:label="fragment_cocktail_detail"
+        android:label="{cocktailName}"
         tools:layout="@layout/fragment_cocktail_detail" >
         <argument
             android:name="cocktailId"
+            app:argType="string" />
+        <argument
+            android:name="cocktailName"
             app:argType="string" />
     </fragment>
 </navigation>
