@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,6 +15,9 @@ import com.capestone.shakeitup.databinding.FragmentCocktailsListBinding
 import com.capestone.shakeitup.service.Status
 import com.capestone.shakeitup.viewmodel.CocktailListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CocktailsListFragment : Fragment() {
@@ -30,7 +32,13 @@ class CocktailsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCocktailsListBinding.inflate(inflater, container, false)
-        val adapter = CocktailAdapter { cocktail -> navigateToDetailScreen(cocktail) }
+
+        val adapter = CocktailAdapter(
+            onClick = { cocktail ->
+                navigateToDetailScreen(cocktail)
+            },
+            onSaveClick = { cocktail -> saveCocktail(cocktail) })
+
         binding.rlCocktailList.adapter = adapter
 
         val isAlcoholic = args.isAlcoholic
@@ -85,8 +93,26 @@ class CocktailsListFragment : Fragment() {
     }
 
     private fun navigateToDetailScreen(cocktail: Cocktail) {
-        findNavController().navigate(CocktailsListFragmentDirections
-            .actionCocktailsListFragmentToCocktailDetailFragment(cocktailId = cocktail.idDrink, cocktailName = cocktail.strDrink))
+        findNavController().navigate(
+            CocktailsListFragmentDirections
+                .actionCocktailsListFragmentToCocktailDetailFragment(
+                    cocktailId = cocktail.idDrink,
+                    cocktailName = cocktail.strDrink
+                )
+        )
+    }
+
+    private fun saveCocktail(cocktail: Cocktail) {
+        if(cocktail.isFavorite){
+            Toast.makeText(requireContext(), "Cocktail removed", Toast.LENGTH_SHORT).show()
+            cocktail.isFavorite = false
+            viewModel.deleteCocktail(cocktail)
+        }else{
+            Toast.makeText(requireContext(), "Cocktail Saved", Toast.LENGTH_SHORT).show()
+            cocktail.isFavorite = true
+            viewModel.saveCocktail(cocktail)
+        }
+
     }
 
     override fun onDestroyView() {
