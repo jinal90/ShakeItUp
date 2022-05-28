@@ -5,5 +5,6 @@
     <string name="cocktail_card">Cocktails</string>
     <string name="mocktail_card">Mocktails</string>
     <string name="select_drink">Select what type of drink you want to drink:</string>
+    <string name="shake_message">Shake for a surprise drink!</string>
 
 </resources>

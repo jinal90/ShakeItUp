@@ -5,9 +5,9 @@
     <dimen name="size_full_image">200dp</dimen>
     <dimen name="card_raius">5dp</dimen>
     <!-- Margins -->
-    <dimen name="standard_margin"> 12dp</dimen>
-
-<dimen name="margin_start_cocktail_name">92dp</dimen>
+    <dimen name="standard_margin">12dp</dimen>
+    <dimen name="big_margin">24dp</dimen>
+    <dimen name="margin_start_cocktail_name">92dp</dimen>
 
     <!-- Paddings -->
     <dimen name="padding_small">8dp</dimen>

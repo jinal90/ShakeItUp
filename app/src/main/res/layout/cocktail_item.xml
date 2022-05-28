@@ -19,7 +19,7 @@
         card_view:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp">
 
@@ -27,20 +27,31 @@
                 android:id="@+id/iv_cocktail_thumbnail"
                 android:layout_width="@dimen/size_thumb_image"
                 android:layout_height="@dimen/size_thumb_image"
+                android:contentDescription="@string/cont_desc_thumb_image"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/cont_desc_thumb_image"/>
+                card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_cocktailName"
                 style="@style/nameText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_start_cocktail_name"
+                android:layout_marginEnd="@dimen/standard_margin"
                 card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toStartOf="@+id/iv_save_cocktail"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 tools:text="some name" />
+
+            <ImageView
+                android:id="@+id/iv_save_cocktail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

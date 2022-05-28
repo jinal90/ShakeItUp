@@ -30,8 +30,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "1.8"
     }
     buildFeatures {
         viewBinding true
@@ -45,12 +48,10 @@ dependencies {
 
     // Support libraries for UI elements
     implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "androidx.cardview:cardview:1.0.0"
-
-
 
     // Retrofit for HTTP client
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -63,7 +64,7 @@ dependencies {
     // Room database for data persistance
     implementation "androidx.room:room-ktx:2.4.2"
     implementation 'androidx.room:room-runtime:2.4.2'
-    annotationProcessor 'androidx.room:room-compiler:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
     testImplementation 'androidx.room:room-testing:2.4.2'
 
     //Coroutines Dependencies

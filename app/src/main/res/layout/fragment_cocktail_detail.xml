@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/tv_cocktailType"
         style="@style/detailText"
-        android:textColor="@color/teal_200"
+        android:textColor="@color/teal_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

@@ -12,17 +12,18 @@ import com.bumptech.glide.Glide
 import com.capestone.shakeitup.R
 import com.capestone.shakeitup.data.Cocktail
 
-class CocktailAdapter (private val onClick: (Cocktail) -> Unit) :
+class CocktailAdapter (private val onClick: (Cocktail) -> Unit, private val onSaveClick: (Cocktail) -> Unit) :
     ListAdapter<Cocktail, CocktailAdapter.ViewHolder>(CocktailDiffCallback) {
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    class ViewHolder(val view: View, val onClick: (Cocktail) -> Unit) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View, val onClick: (Cocktail) -> Unit, val onSaveClick: (Cocktail) -> Unit) : RecyclerView.ViewHolder(view) {
         private val cocktailNameTextView: TextView
         private var currentCocktail: Cocktail? = null
         private val cocktailThumbnailImageView: ImageView
+        private val saveCocktail: ImageView
 
         init {
             itemView.setOnClickListener {
@@ -32,6 +33,18 @@ class CocktailAdapter (private val onClick: (Cocktail) -> Unit) :
             }
             cocktailNameTextView = view.findViewById(R.id.tv_cocktailName)
             cocktailThumbnailImageView = view.findViewById(R.id.iv_cocktail_thumbnail)
+            saveCocktail = view.findViewById(R.id.iv_save_cocktail)
+
+            saveCocktail.setOnClickListener{
+                currentCocktail?.let {
+                    if (it.isFavorite){
+                        saveCocktail.setImageDrawable(view.resources.getDrawable(R.drawable.ic_baseline_favorite_border_24))
+                    }else{
+                        saveCocktail.setImageDrawable(view.resources.getDrawable(R.drawable.ic_baseline_favorite_24))
+                    }
+                    onSaveClick(it)
+                }
+            }
 
         }
 
@@ -39,6 +52,11 @@ class CocktailAdapter (private val onClick: (Cocktail) -> Unit) :
             currentCocktail = cocktail
 
             cocktailNameTextView.text = cocktail.strDrink
+            if (cocktail.isFavorite){
+                saveCocktail.setImageDrawable(view.resources.getDrawable(R.drawable.ic_baseline_favorite_24))
+            }else{
+                saveCocktail.setImageDrawable(view.resources.getDrawable(R.drawable.ic_baseline_favorite_border_24))
+            }
             Glide
                 .with(view)
                 .load(cocktail.strDrinkThumb+"/preview")
@@ -51,7 +69,7 @@ class CocktailAdapter (private val onClick: (Cocktail) -> Unit) :
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.cocktail_item, viewGroup, false)
 
-        return ViewHolder(view, onClick)
+        return ViewHolder(view, onClick, onSaveClick)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
