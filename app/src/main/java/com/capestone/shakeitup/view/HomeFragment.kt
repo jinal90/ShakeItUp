@@ -1,11 +1,12 @@
 package com.capestone.shakeitup.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.capestone.shakeitup.R
 import com.capestone.shakeitup.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -20,13 +21,24 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.cardViewCocktail.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(isAlcoholic = true, title = "Alcoholic Cocktails"))
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(
+                    isAlcoholic = true, title = getString(
+                        R.string.title_alcoholic_list
+                    )
+                )
+            )
         }
         binding.cardViewMocktail.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(isAlcoholic = false, title = "Non-Alcoholic Mocktails"))
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToCocktailsListFragment(
+                    isAlcoholic = false, title = getString(
+                        R.string.title_nonalcoholic_list
+                    )
+                )
+            )
         }
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {

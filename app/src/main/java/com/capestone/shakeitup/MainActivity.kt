@@ -14,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.capestone.shakeitup.service.Status
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private val viewModel: CocktailListViewModel by viewModels()
     private var mSensorManager: SensorManager? = null
     private var mAccelerometer: Sensor? = null
+    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +37,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(
             this,
-            findNavController(R.id.nav_host_fragment),
+            navController,
             appBarConfiguration
         )
 
@@ -53,7 +58,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
@@ -92,7 +96,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             mShakeTimestamp = now
             mShakeCount++
 
-            Toast.makeText(this, "shake detected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.fetch_random_drink_message), Toast.LENGTH_SHORT)
+                .show()
             viewModel.getRandomCocktail().observe(this, Observer {
                 it?.let { resource ->
                     when (resource.status) {
@@ -103,11 +108,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                     "cocktailId" to list.cocktailDetailsList[0].idDrink,
                                     "cocktailName" to list.cocktailDetailsList[0].strDrink
                                 )
-                                findNavController(R.id.nav_graph).navigate(
+                                navController.navigate(
                                     R.id.cocktailDetailFragment,
                                     bundle
                                 )
-                                
+
                                 Log.d(
                                     "Test list", "Test 1234 -> Random drink description:" +
                                             " ${list.cocktailDetailsList[0].strInstructions}"

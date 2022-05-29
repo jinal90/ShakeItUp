@@ -11,17 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        card_view:cardCornerRadius="4dp"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        card_view:cardCornerRadius="@dimen/card_radius"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp">
+            android:layout_margin="@dimen/standard_margin">
 
             <ImageView
                 android:id="@+id/iv_cocktail_thumbnail"
@@ -34,7 +34,7 @@
             <TextView
                 android:id="@+id/tv_cocktailName"
                 style="@style/nameText"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/size_zero"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_start_cocktail_name"
                 android:layout_marginEnd="@dimen/standard_margin"

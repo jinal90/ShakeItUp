@@ -10,14 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.capestone.shakeitup.R
 import com.capestone.shakeitup.data.Cocktail
 import com.capestone.shakeitup.databinding.FragmentCocktailsListBinding
 import com.capestone.shakeitup.service.Status
+import com.capestone.shakeitup.service.isConnectedToNetwork
 import com.capestone.shakeitup.viewmodel.CocktailListViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CocktailsListFragment : Fragment() {
@@ -43,53 +42,61 @@ class CocktailsListFragment : Fragment() {
 
         val isAlcoholic = args.isAlcoholic
 
-        if (isAlcoholic) {
-            viewModel.getAlcoholicCocktails().observe(viewLifecycleOwner) {
-                it?.let { resource ->
-                    when (resource.status) {
-                        Status.SUCCESS -> {
-                            resource.data?.let { list ->
-                                adapter.submitList(list.cocktailList)
-                                Log.d(
-                                    "Test list", "Test 1234 -> first alcoholic drink id:" +
-                                            " ${list.cocktailList[0].idDrink}"
-                                )
+        if (isConnectedToNetwork(requireContext())) {
+            if (isAlcoholic) {
+                viewModel.getAlcoholicCocktails().observe(viewLifecycleOwner) {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                resource.data?.let { list ->
+                                    adapter.submitList(list.cocktailList)
+                                    Log.d(
+                                        "Test list", "Test 1234 -> first alcoholic drink id:" +
+                                                " ${list.cocktailList[0].idDrink}"
+                                    )
+                                }
+                            }
+                            Status.ERROR -> {
+                                Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                            }
+                            Status.LOADING -> {
+                                Log.d("Test alcoholic", "Test 1234 -> alcoholic Loading")
                             }
                         }
-                        Status.ERROR -> {
-                            Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                        }
-                        Status.LOADING -> {
-                            Log.d("Test alcoholic", "Test 1234 -> alcoholic Loading")
+                    }
+                }
+            } else {
+                viewModel.getNonAlcoholicCocktails().observe(viewLifecycleOwner) {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                resource.data?.let { list ->
+                                    adapter.submitList(list.cocktailList)
+                                    Log.d(
+                                        "Test list", "Test 1234 -> first alcoholic drink id:" +
+                                                " ${list.cocktailList[0].idDrink}"
+                                    )
+                                }
+                            }
+                            Status.ERROR -> {
+                                Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                            }
+                            Status.LOADING -> {
+                                Log.d("Test alcoholic", "Test 1234 -> alcoholic Loading")
+                            }
                         }
                     }
                 }
             }
         } else {
-            viewModel.getNonAlcoholicCocktails().observe(viewLifecycleOwner) {
-                it?.let { resource ->
-                    when (resource.status) {
-                        Status.SUCCESS -> {
-                            resource.data?.let { list ->
-                                adapter.submitList(list.cocktailList)
-                                Log.d(
-                                    "Test list", "Test 1234 -> first alcoholic drink id:" +
-                                            " ${list.cocktailList[0].idDrink}"
-                                )
-                            }
-                        }
-                        Status.ERROR -> {
-                            Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                        }
-                        Status.LOADING -> {
-                            Log.d("Test alcoholic", "Test 1234 -> alcoholic Loading")
-                        }
-                    }
-                }
-            }
+            Toast.makeText(
+                context,
+                getString(R.string.no_internet_connection_message),
+                Toast.LENGTH_LONG
+            ).show()
         }
-        val view = binding.root
-        return view
+
+        return binding.root
     }
 
     private fun navigateToDetailScreen(cocktail: Cocktail) {
@@ -103,12 +110,20 @@ class CocktailsListFragment : Fragment() {
     }
 
     private fun saveCocktail(cocktail: Cocktail) {
-        if(cocktail.isFavorite){
-            Toast.makeText(requireContext(), "Cocktail removed", Toast.LENGTH_SHORT).show()
+        if (cocktail.isFavorite) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.drink_removed_message),
+                Toast.LENGTH_SHORT
+            ).show()
             cocktail.isFavorite = false
             viewModel.deleteCocktail(cocktail)
-        }else{
-            Toast.makeText(requireContext(), "Cocktail Saved", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.drink_saved_message),
+                Toast.LENGTH_SHORT
+            ).show()
             cocktail.isFavorite = true
             viewModel.saveCocktail(cocktail)
         }

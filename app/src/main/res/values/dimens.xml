@@ -3,7 +3,9 @@
     <!-- size -->
     <dimen name="size_thumb_image">80dp</dimen>
     <dimen name="size_full_image">200dp</dimen>
-    <dimen name="card_raius">5dp</dimen>
+    <dimen name="card_radius">5dp</dimen>
+    <dimen name="size_zero">0dp</dimen>
+
     <!-- Margins -->
     <dimen name="standard_margin">12dp</dimen>
     <dimen name="big_margin">24dp</dimen>

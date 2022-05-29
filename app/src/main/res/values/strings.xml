@@ -5,6 +5,19 @@
     <string name="cocktail_card">Cocktails</string>
     <string name="mocktail_card">Mocktails</string>
     <string name="select_drink">Select what type of drink you want to drink:</string>
+    <string name="drink_type">This drink is %1$s.</string>
+    <string name="title_ingredients">Ingredients: \n</string>
+
+    <!-- Title -->
+    <string name="title_home">Shake It Up!</string>
+    <string name="title_alcoholic_list">Alcoholic Cocktails</string>
+    <string name="title_nonalcoholic_list">Non-Alcoholic Mocktails</string>
+
+    <!-- messages -->
+    <string name="drink_removed_message">Drink removed from the favorites.</string>
+    <string name="drink_saved_message">Drink added to the favorites.</string>
     <string name="shake_message">Shake for a surprise drink!</string>
+    <string name="fetch_random_drink_message">Shake detected: Fetching random drink...</string>
+    <string name="no_internet_connection_message">Error: Phone not connected to Network.</string>
 
 </resources>
